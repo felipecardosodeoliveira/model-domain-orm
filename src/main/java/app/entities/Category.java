@@ -1,6 +1,9 @@
-package entities;
+package app.entities;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "tb_category")
@@ -9,6 +12,9 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
+
+    @OneToMany(mappedBy = "category")
+    private List<Activity> activities = new ArrayList<>();
 
     public Category() {}
 
@@ -31,6 +37,10 @@ public class Category {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<Activity> getActivities() {
+        return activities;
     }
 
     @Override
